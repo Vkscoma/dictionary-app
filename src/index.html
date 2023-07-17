@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/dist/output.css" rel="stylesheet">
+    <title>Dictionary App</title>
+</head>
+
+<body>
+    <nav class="m-auto mt-8">
+        <div class="nav-wrapper flex justify-between items-center">
+            <h1 class="brand-logo">Dictionary App</h1>
+            <div class="flex justify-center">
+                <!--Font Select-->
+                <select id="fonts" class="text-gray-900 text-sm rounded-lg outline-none cursor-pointer">
+                    <option value="serif" selected>Serif</option>
+                    <option value="poppins">Poppins</option>
+                    <option value="roboto">Robot</option>
+                    <option value="montserrat">Montserrat</option>
+                </select>
+                <!--Toggle-->
+                <label class="relative inline-flex items-center cursor-pointer ml-12">
+                    <input type="checkbox" value="" class="sr-only peer">
+                    <div
+                        class="w-11 h-6 bg-gray-200 outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                    </div>
+                    <span class="ml-3 text-sm font-medium text-gray-900 dark:text-black">Theme</span>
+                </label>
+            </div>
+        </div>
+    </nav>
+</body>
+
+</html>
