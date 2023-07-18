@@ -6,7 +6,7 @@ function getDefinition(word) {
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
         .then((response) => response.json())
         .then((data) => {
-            console.log(data)
+            console.log(data[0].meanings[0].partOfSpeech);
             // Update DOM with the Word
             const keyWord = document.getElementById("main--word");
             keyWord.innerText = data[0].word.slice(0, 1).toUpperCase() + data[0].word.slice(1);
@@ -28,6 +28,22 @@ function getDefinition(word) {
             }
             // Render Synonyms of the word
             const synonymElement = document.querySelector("#synonyms--element");
+            const synonymArray = data[0].meanings[0].synonyms;
+            if (synonymArray.length > 1) {
+                for (let i = 0; i < synonymArray.length; i++) {
+                    const synonmyLI = document.createElement("li");
+                    synonmyLI.classList.add("my-2", "text-purple-400");
+                    synonmyLI.innerText = synonymArray[i];
+                    synonymElement.appendChild(synonmyLI);
+                }
+            } else {
+                const synonmyLI = document.createElement("li");
+                synonmyLI.innerText = "No Synonyms found";
+                synonymElement.appendChild(synonmyLI);
+            }
+            // Render what type of word it is
+            const typeElement = document.querySelector("#verb--element");
+            typeElement.innerText = data[0].meanings[0].partOfSpeech;
             // Render Example of the word
             const exampleElement = document.querySelector("#example--list ");
             const exampleSample = data[0].meanings[1].definitions[0].example;
