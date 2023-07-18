@@ -6,11 +6,20 @@ function getDefinition(word) {
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
         .then((response) => response.json())
         .then((data) => {
-            handleWord(data);
-            renderDefinition(data);
-            renderSynonyms(data);
-            renderPartOfSpeech(data);
-            renderExample(data);
+            try {
+                handleWord(data);
+                renderDefinition(data);
+                renderSynonyms(data);
+                renderPartOfSpeech(data);
+                renderExample(data);
+            } catch (error) {
+                const h1 = document.createElement("h1");
+                const mainSection = document.querySelector(".main--section");
+                h1.classList.add("text-2xl", "text-center", "text-red-500");
+                h1.setAttribute("id", "error--message");
+                h1.innerText = "No definition found";
+                mainSection.insertBefore(h1, mainSection.childNodes[0]);
+            }
         });
 }
 
@@ -83,15 +92,28 @@ function createListItem(text, ...classNames) {
 
 searchBtn.addEventListener("click", (event) => {
     event.preventDefault();
+    // Variables
     const word = document.getElementById("default-search");
     const definitionElement = document.querySelector("#definition--list");
     const synonymElement = document.querySelector("#synonyms--element");
     const wordDescriptions = document.querySelectorAll(".word--description");
+    const exampleElement = document.querySelector("#example--list");
+    const h1Error = document.querySelector("#error--message");
+
+    //Call getDefinition function
     getDefinition(word.value);
+
+    //Show word descriptions
     wordDescriptions.forEach((description) => {
         description.classList.remove("hidden");
     });
+
+    //Clear input fields
     word.value = "";
     definitionElement.innerText = "";
     synonymElement.innerText = "";
+    exampleElement.innerText = "";
+    if (h1Error) {
+        h1Error.remove();
+    }
 });
