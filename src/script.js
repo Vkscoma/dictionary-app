@@ -53,7 +53,7 @@ function renderSynonyms(data) {
 
     if (synonymArray.length > 1) {
         for (let i = 0; i < synonymArray.length; i++) {
-            const synonymLI = createListItem(synonymArray[i], "my-2", "text-purple-400");
+            const synonymLI = createListItem(synonymArray[i], "my-2", "dark:text-purple-400", "text-purple-500");
             synonymElement.appendChild(synonymLI);
         }
     } else {
